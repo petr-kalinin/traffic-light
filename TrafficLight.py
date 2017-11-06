@@ -13,6 +13,7 @@ def periodic(timeouts, offset):
     current = True
     for val in timeouts:
         values = values + [current] * val
+        current = not current
 
     def generator(time):
         return values[(time + offset) % len(values)]
@@ -51,5 +52,5 @@ class TrafficLight(object):
     def set_constant(self, color, value):
         self.set_generator(color, constant(value))
 
-    def set_periodic(self, color, timeouts, offset):
-        self.set_generator(color, periodic(timeouts, offset))
+    def set_periodic(self, color, timeouts, offset=None):
+        self.set_generator(color, periodic(timeouts, offset or 0))
