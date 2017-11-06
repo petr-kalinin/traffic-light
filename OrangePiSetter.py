@@ -14,7 +14,7 @@ if not os.getegid() == 0:
     sys.exit('Script must be run as root')
 
 
-class DummySetter:
+class OrangePiSetter:
     def __call__(self, *values):
         for i in range(len(leds)):
             gpio.output(leds[i], values[i])
