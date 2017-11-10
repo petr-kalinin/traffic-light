@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 import time
 
-from DummySetter import DummySetter
+from OrangePiSetter import OrangePiSetter
 from TrafficLight import TrafficLight
 from OpenWeatherMapProvider import update_light
 
 try:
-    light = TrafficLight(DummySetter())
+    light = TrafficLight(OrangePiSetter())
     while True:
         update_light(light)
         time.sleep(60*10)
