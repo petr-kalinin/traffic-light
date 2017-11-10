@@ -3,12 +3,12 @@ import time
 
 from DummySetter import DummySetter
 from TrafficLight import TrafficLight
-from YandexJamsProvider import updateLight
+from YandexJamsProvider import update_light
 
 try:
     light = TrafficLight(DummySetter())
     while True:
-        updateLight(light)
+        update_light(light)
         time.sleep(30)
 
 except KeyboardInterrupt:
