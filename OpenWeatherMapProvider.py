@@ -11,9 +11,9 @@ PERIOD_TO_ACCOUNT = 9 * HOUR
 FORECAST_PERIOD_HOURS = 3
 
 STATES = ((1e-2, True, False, False),
-          (2, True, True, False),
-          (7, False, True, False),
-          (20, False, True, True),
+          (0.5, True, True, False),
+          (4, False, True, False),
+          (15, False, True, True),
           (1e20, False, False, True))
 
 
