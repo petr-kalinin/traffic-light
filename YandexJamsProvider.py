@@ -1,6 +1,7 @@
 import time
 import json
 import urllib.request
+from logger import logger
 
 
 def download_as_json(url):
@@ -21,12 +22,11 @@ def update_light(traffic_light):
         stamp_url = "https://api-maps.yandex.ru/services/coverage/v2/layers_stamps?lang=ru_RU&l=trf"
         stamp_data = download_as_json(stamp_url)
         stamp = stamp_data["trf"]["version"]
-        print(stamp)
         url = 'https://jgo.maps.yandex.net/description/traffic-light?lang=ru_RU&ids=47&tm={}'.format(stamp)
-        print(url)
+        logger.debug("url=" + url)
         data = download_as_json(url)
         level = data["data"]["features"][0]["properties"]["JamsMetaData"]["level"]
-        print("level=", level)
+        logger.debug("level={}".format(level))
         for state in STATES:
             if level <= state[0]:
                 traffic_light.set_constant(traffic_light.GREEN, state[1])
@@ -36,7 +36,7 @@ def update_light(traffic_light):
         else:
             raise Exception("Strange level")
     except Exception as e:
-        print("error", e)
+        logger.error("error {}".format(e))
         traffic_light.set_constant(traffic_light.GREEN, False)
         traffic_light.set_periodic(traffic_light.YELLOW, [4, 4])
         traffic_light.set_constant(traffic_light.RED, False)

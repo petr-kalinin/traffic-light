@@ -2,7 +2,7 @@ import time
 import os
 import json
 import urllib.request
-
+from logger import logger
 
 APIKEY = os.environ["APIKEY"]
 
@@ -43,7 +43,7 @@ def update_light(traffic_light):
         url = "http://api.openweathermap.org/data/2.5/forecast?lat=56.326944&lon=44.0075&appid={}".format(APIKEY)
         data = download_as_json(url)
         flow = calculate_flow(data)
-        print("flow=", flow)
+        logger.debug("flow={}".format(flow))
         for state in STATES:
             if flow <= state[0]:
                 traffic_light.set_constant(traffic_light.GREEN, state[1])
@@ -53,7 +53,7 @@ def update_light(traffic_light):
         else:
             raise Exception("Strange flow")
     except Exception as e:
-        print("error", e)
+        logger.error("error {}".format(e))
         traffic_light.set_constant(traffic_light.GREEN, False)
         traffic_light.set_constant(traffic_light.YELLOW, False)
         traffic_light.set_constant(traffic_light.RED, False)

@@ -1,4 +1,5 @@
 import time
+from logger import logger
 
 class Updater:
     def __init__(self, other_provider):
@@ -9,7 +10,7 @@ class Updater:
         END_TIME = 22 * 60
         t = time.localtime()
         current_time = t.tm_hour * 60 + t.tm_min
-        print("current time: ", current_time)
+        logger.debug("current time: {}".format(current_time))
         if current_time < START_TIME or current_time > END_TIME:
             traffic_light.set_constant(traffic_light.GREEN, False)
             traffic_light.set_constant(traffic_light.YELLOW, False)

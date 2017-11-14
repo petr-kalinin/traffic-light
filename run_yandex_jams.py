@@ -4,6 +4,7 @@ import time
 from DummySetter import DummySetter
 from TrafficLight import TrafficLight
 from YandexJamsProvider import update_light
+from logger import logger
 
 try:
     light = TrafficLight(DummySetter())
@@ -13,4 +14,4 @@ try:
 
 except KeyboardInterrupt:
     light.stop()
-    print ("Goodbye.")
+    logger.debug("Goodbye.")
