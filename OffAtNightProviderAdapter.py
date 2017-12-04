@@ -1,4 +1,5 @@
 import time
+import datetime
 from logger import logger
 
 class Updater:
@@ -6,12 +7,15 @@ class Updater:
         self._other_provider = other_provider
 
     def __call__(self, traffic_light):
-        START_TIME = 6 * 60 + 45
-        END_TIME = 22 * 60
+        dow = datetime.datetime.today().weekday()
+        start_time = 6 * 60 + 45
+        end_time = 22 * 60
+        if dow >= 5:
+            start_time = 8 * 60
         t = time.localtime()
         current_time = t.tm_hour * 60 + t.tm_min
         logger.debug("current time: {}".format(current_time))
-        if current_time < START_TIME or current_time > END_TIME:
+        if current_time < start_time or current_time > end_time:
             traffic_light.set_constant(traffic_light.GREEN, False)
             traffic_light.set_constant(traffic_light.YELLOW, False)
             traffic_light.set_constant(traffic_light.RED, False)
