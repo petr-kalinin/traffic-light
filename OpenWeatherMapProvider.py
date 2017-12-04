@@ -31,9 +31,10 @@ def calculate_flow(data):
         if forecast["dt"] > max_time:
             break
         current = 0
-        for tp in "rain", "snow":
+        for tp, mult in ("rain", 1), ("snow", 3):
             if tp in forecast:
-                current += forecast[tp].get("3h", 0)
+                print(tp, forecast[tp].get("3h", 0), mult)
+                current += forecast[tp].get("3h", 0) * mult
         result = max(result, current)
     return result/FORECAST_PERIOD_HOURS
 
