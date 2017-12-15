@@ -9,7 +9,7 @@ class Updater:
     def __call__(self, traffic_light):
         dow = datetime.datetime.today().weekday()
         start_time = 6 * 60 + 45
-        end_time = 22 * 60
+        end_time = 21 * 60 + 10
         if dow >= 5:
             start_time = 8 * 60
         t = time.localtime()
