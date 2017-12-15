@@ -17,4 +17,4 @@ if not os.getegid() == 0:
 class OrangePiSetter:
     def __call__(self, *values):
         for i in range(len(leds)):
-            gpio.output(leds[i], values[i])
+            gpio.output(leds[i], 0 if values[i] else 1)

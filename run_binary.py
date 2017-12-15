@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import time
 
-from DummySetter import DummySetter
+from OrangePiSetter import OrangePiSetter
 from TrafficLight import TrafficLight
 
 try:
-    light = TrafficLight(DummySetter())
+    light = TrafficLight(OrangePiSetter())
     i = 0
     while True:
         light.set_constant(light.RED, i % 2 == 1)
