@@ -13,22 +13,22 @@ HOLIDAYS = (
     (8, 1),
     (23, 2),
     (24, 2),
-    (25, 2),
-    (26, 2),
     (8, 3),
-    (29, 4),
-    (30, 4),
+    (9, 3),
+    (10, 3),
     (1, 5),
-    (6, 5),
-    (7, 5),
-    (8, 5),
+    (2, 5),
+    (3, 5),
+    (4, 5),
+    (5, 5),
     (9, 5),
-    (10, 6),
-    (11, 6),
+    (10, 5),
+    (11, 5),
+    (12, 5),
     (12, 6),
-    (4, 11),
-    (5, 11),
-    (6, 11))
+    (2, 11),
+    (3, 11),
+    (4, 11))
 
 class Updater:
     def __init__(self, other_provider):
@@ -42,7 +42,7 @@ class Updater:
         start_time = 6 * 60 + 45
         end_time = 21 * 60 + 10
         if dow >= 5 or (day, month) in HOLIDAYS:
-            start_time = 8 * 60
+            start_time = 8 * 60 + 45
         t = time.localtime()
         current_time = t.tm_hour * 60 + t.tm_min
         logger.debug("current time: {}".format(current_time))
