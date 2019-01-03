@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import time
+import sys
 
 from TrafficLight import TrafficLight
 from OpenWeatherMapProvider import update_light
@@ -18,6 +19,7 @@ try:
         updater(light)
         time.sleep(60*10)
 
-except KeyboardInterrupt:
+except BaseException as e:
     light.stop()
+    logger.exception(e)
     logger.debug("Goodbye.")
