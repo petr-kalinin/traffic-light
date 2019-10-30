@@ -32,10 +32,12 @@ def calculate_flow(data):
     for forecast in data["list"]:
         if forecast["dt"] > max_time:
             break
+        shift = int((forecast["dt"] - time.time()) / HOUR) // 3 * 3
         current = 0
         for tp, mult in ("rain", 1), ("snow", 3):
             if tp in forecast:
                 print(tp, forecast[tp].get("3h", 0), mult)
+                graphyte.send("{}h.{}".format(shift, tp), forecast[tp].get("3h", 0))
                 current += forecast[tp].get("3h", 0) * mult
         result = max(result, current)
     return result/FORECAST_PERIOD_HOURS

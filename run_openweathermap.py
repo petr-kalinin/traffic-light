@@ -8,14 +8,15 @@ try:
     from TrafficLight import TrafficLight
     from OpenWeatherMapProvider import update_light
     from OffAtNightProviderAdapter import Updater
+    from OffAtNightSetterAdapter import Setter as Adapter
 
     try:
         from OrangePiSetter import OrangePiSetter as Setter
     except:
         from DummySetter import DummySetter as Setter
 
-    updater = Updater(update_light)
-    light = TrafficLight(Setter())
+    updater = update_light
+    light = TrafficLight(Adapter(Setter()))
     while True:
         updater(light)
         time.sleep(60*10)
