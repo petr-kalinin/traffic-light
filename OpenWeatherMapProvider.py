@@ -2,6 +2,7 @@ import time
 import os
 import json
 import urllib.request
+import graphyte
 from logger import logger
 
 APIKEY = os.environ["APIKEY"]
@@ -16,6 +17,7 @@ STATES = ((1e-2, True, False, False),
           (2, False, True, True),
           (1e20, False, False, True))
 
+graphyte.init('ije.algoprog.ru', prefix='trfl')
 
 def download_as_json(url):
     response = urllib.request.urlopen(url)
@@ -45,8 +47,10 @@ def update_light(traffic_light):
         data = download_as_json(url)
         flow = calculate_flow(data)
         logger.debug("flow={}".format(flow))
-        for state in STATES:
+        graphyte.send("flow", flow)
+        for i, state in enumerate(STATES):
             if flow <= state[0]:
+                graphyte.send("state", i)
                 traffic_light.set_constant(traffic_light.GREEN, state[1])
                 traffic_light.set_constant(traffic_light.YELLOW, state[2])
                 traffic_light.set_constant(traffic_light.RED, state[3])
@@ -58,6 +62,3 @@ def update_light(traffic_light):
         traffic_light.set_constant(traffic_light.GREEN, False)
         traffic_light.set_constant(traffic_light.YELLOW, False)
         traffic_light.set_constant(traffic_light.RED, False)
-
-
-
