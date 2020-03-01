@@ -48,5 +48,5 @@ class Setter:
         if current_time < start_time or current_time > end_time:
             self._other_setter(False, False, False)
             return
-        self._other_provider(*args)
+        self._other_setter(*args)
 

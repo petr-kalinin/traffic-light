@@ -6,4 +6,4 @@ class DummySetter:
         old_state = self.state[:]
         self.state = (red, yellow, green)
         if old_state != self.state:
-            print(self.state)
+            print("Dummy: ", self.state)

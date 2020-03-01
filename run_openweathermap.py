@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3.8 -u
 import time
 import sys
 from logger import logger
@@ -12,7 +12,8 @@ try:
 
     try:
         from OrangePiSetter import OrangePiSetter as Setter
-    except:
+    except Exception as e:
+        print("Could not load OranegPiSetter: ", e);
         from DummySetter import DummySetter as Setter
 
     updater = update_light
