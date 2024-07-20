@@ -21,12 +21,8 @@ STATES = ((1e-2, True, False, False),
 graphyte.init('ije.algoprog.ru', prefix='trfl')
 
 def download_as_json(url):
-    try:
-        response = urllib.request.urlopen(url)
-        text = response.read().decode('utf-8')
-    except Exception as e:
-        print("Error while downloading: ", e)
-        sys.exit(1)
+    response = urllib.request.urlopen(url)
+    text = response.read().decode('utf-8')
     return json.loads(text)
 
 
